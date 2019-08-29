@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function TaskForm(props) {
-  const [taskTitle, setTaskTitle] = useState("");
-  const [taskContent, setTaskContent] = useState("");
+import createButton from "./create-button.png";
 
-  const handleTitleChange = event => {
-    setTaskTitle(event.target.value);
-  };
+function TaskForm(props) {
+  const [taskContent, setTaskContent] = useState("");
 
   const handleContentChange = event => {
     setTaskContent(event.target.value);
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
+  const handleKeyDown = e => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
 
+  const handleSubmit = () => {
     axios
       .post("http://localhost:3000/tasks", {
-        title: taskTitle,
         content: taskContent
       })
       .then(({ data: newTask }) => {
@@ -30,32 +30,26 @@ function TaskForm(props) {
         console.log(errors);
       })
       .finally(() => {
-        setTaskTitle("");
         setTaskContent("");
       });
   };
 
   return (
-    <div>
-      <label htmlFor="taskTitle">Titulo</label>
-      <input
-        type="text"
-        name="taskTitle"
-        onChange={handleTitleChange}
-        value={taskTitle}
-      />
+    <div id="taskFormWrapper">
+      <div>
+        <input
+          type="text"
+          name="taskContent"
+          onChange={handleContentChange}
+          onKeyDown={handleKeyDown}
+          value={taskContent}
+          placeholder="Add task"
+        />
 
-      <label htmlFor="taskContent">Conteudo</label>
-      <input
-        type="text"
-        name="taskContent"
-        onChange={handleContentChange}
-        value={taskContent}
-      />
-
-      <button type="submit" onClick={handleSubmit}>
-        Novo Task
-      </button>
+        <span type="submit" onClick={handleSubmit}>
+          <img src={createButton} alt="Create" />
+        </span>
+      </div>
     </div>
   );
 }

@@ -1,3 +1,95 @@
+html {
+  background: url('./background.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Raleway', sans-serif;
+  color: #453942;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 21px;
+}
+
 .App {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+#todoWrapper {
+  background-image: linear-gradient(45deg, rgba(200, 199, 218, 1) 0%, rgba(255, 226, 235, 1) 100%);
+  min-height: 80vh;
+  min-width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 15px;
+}
+
+#taskFormWrapper {
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+  margin-top: 1rem;
+  border: none;
+  margin-bottom: 2rem;
+}
+
+#taskFormWrapper>div {
+  min-width: 50%;
+  border-bottom: solid 1px #AF657B;
+  padding: .7rem;
+}
+
+#taskFormWrapper>div>input {
+  color: #453942;
+  font-size: 32px;
+  border: none;
+  background-color: inherit;
+}
+
+#taskFormWrapper>div>input:focus {
+  outline: none;
+}
+
+img {
+  height: 21px;
+  width: 21px;
+  cursor: pointer;
+}
+
+.taskListWrapper {
+  min-width: 87%
+}
+
+.taskWrapper {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: .5rem;
+}
+
+.taskCheckBox {
+  margin-left: .5rem;
+}
+
+.taskContent {
+  position: relative;
+  top: -.1rem;
+  margin-left: 1rem;
+}
+
+.taskDeleteButton {
+  margin-left: auto;
+  margin-right: .5rem;
+}
+
+.taskCompleted {
+  text-decoration: line-through;
+  color: #957982;
 }

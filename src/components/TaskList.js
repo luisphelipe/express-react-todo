@@ -4,16 +4,9 @@ import Task from "./Task";
 
 function TaskList(props) {
   return (
-    <div>
+    <div className="taskListWrapper">
       {props.tasks.map(task => {
-        return (
-          <Task
-            task={task}
-            key={task._id}
-            id={task._id}
-            setTasks={props.setTasks}
-          />
-        );
+        return <Task task={task} key={task._id} setTasks={props.setTasks} />;
       })}
     </div>
   );
