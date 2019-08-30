@@ -52,11 +52,13 @@ body {
 
 #taskFormWrapper > div {
   min-width: 50%;
+  max-width: 80%;
   border-bottom: solid 1px #213;
   padding: 0.7rem;
 }
 
 #taskFormWrapper > div > input {
+  max-width: calc(100% - 21px);
   font-size: 32px;
   border: none;
   background-color: inherit;
@@ -226,6 +228,11 @@ input::placeholder {
 
   body {
     font-size: 16px;
+  }
+
+  #taskFormWrapper,
+  #taskFormWrapper > div {
+    max-width: 100%;
   }
 
   #taskFormWrapper > div > input {
