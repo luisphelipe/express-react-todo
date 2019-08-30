@@ -1,14 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
-function PrivateNav(props) {
+function PrivateNav({ handleLogout }) {
   return (
     <ul>
       <li>
-        <Link to="/">Todo</Link>
+        <NavLink to="/" activeClassName="selectedLink">
+          Todo
+        </NavLink>
       </li>
-      <li id="logoutLi" onClick={() => props.submitLogout()}>
-        Logout
+      <li id="logoutLi" onClick={handleLogout}>
+        <a href="#" onClick={event => event.preventDefault()}>
+          Logout
+        </a>
       </li>
     </ul>
   );

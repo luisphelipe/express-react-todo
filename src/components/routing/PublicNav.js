@@ -1,18 +1,21 @@
-import React from 'react'
-import { Link } from "react-router-dom";
-
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
 
 function PublicNav() {
   return (
     <ul>
       <li>
-        <Link to="/login/">Login</Link>
+        <NavLink to="/login/" activeClassName="selectedLink">
+          Login
+        </NavLink>
       </li>
       <li>
-        <Link to="/signup/">Signup</Link>
+        <NavLink to="/signup/" activeClassName="selectedLink">
+          Signup
+        </NavLink>
       </li>
     </ul>
-  )
+  );
 }
 
 export default PublicNav;

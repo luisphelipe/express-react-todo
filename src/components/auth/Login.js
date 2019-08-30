@@ -6,7 +6,7 @@ function Login({ handleAuth, setToken }) {
     [password, setPassword] = useState("");
 
   function submitLogin(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
 
     axios
       .post("http://localhost:3000/auth/login", {
@@ -23,25 +23,27 @@ function Login({ handleAuth, setToken }) {
   }
 
   return (
-    <div>
-      <h2>Login</h2>
-      <div className="form">
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          name="email"
-          onChange={event => setEmail(event.target.value)}
-        />
+    <div class="form">
+      <input
+        type="text"
+        name="email"
+        placeholder="Email"
+        onChange={event => setEmail(event.target.value)}
+      />
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={event => setPassword(event.target.value)}
-        />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        onChange={event => setPassword(event.target.value)}
+        onKeyDown={event => {
+          if (event.key === "Enter") {
+            submitLogin();
+          }
+        }}
+      />
 
-        <button onClick={event => submitLogin(event)}>Login</button>
-      </div>
+      <button onClick={event => submitLogin(event)}>Login</button>
     </div>
   );
 }

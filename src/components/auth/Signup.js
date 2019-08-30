@@ -27,33 +27,30 @@ function Signup({ handleAuth, setToken }) {
   }
 
   return (
-    <div>
-      <h2>Signup</h2>
-      <div className="form">
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          name="email"
-          id="email"
-          onChange={event => setEmail(event.target.value)}
-        />
+    <div class="form">
+      <input
+        type="text"
+        name="email"
+        id="email"
+        placeholder="Email"
+        onChange={event => setEmail(event.target.value)}
+      />
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={event => setPassword(event.target.value)}
-        />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        onChange={event => setPassword(event.target.value)}
+      />
 
-        <label htmlFor="password_confirmation">Password Confirmation</label>
-        <input
-          type="password"
-          name="password_confirmation"
-          onChange={event => setPasswordConfirmation(event.target.value)}
-        />
+      <input
+        type="password"
+        name="password_confirmation"
+        placeholder="Password Confirmation"
+        onChange={event => setPasswordConfirmation(event.target.value)}
+      />
 
-        <button onClick={event => submitSignup(event)}>Signup</button>
-      </div>
+      <button onClick={event => submitSignup(event)}>Signup</button>
     </div>
   );
 }

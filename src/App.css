@@ -1,11 +1,16 @@
+/*
+  Color pallete:
+  primary: $213
+  secondary: #768
+*/
+
 html {
-  background: url('./background.jpg') no-repeat center center fixed;
+  background: url("./background.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  font-family: 'Raleway', sans-serif;
-  color: #453942;
+  font-family: "Raleway", sans-serif;
 }
 
 body {
@@ -22,8 +27,13 @@ body {
 }
 
 #todoWrapper {
-  background-image: linear-gradient(45deg, rgba(200, 199, 218, 1) 0%, rgba(255, 226, 235, 1) 100%);
-  min-height: 80vh;
+  background-image: linear-gradient(
+    45deg,
+    rgba(200, 199, 218, 0.5) 0%,
+    rgba(255, 226, 235, 0.5) 100%
+  );
+  box-shadow: 2px 4px rgb(34, 17, 51, 0.5);
+  min-height: 70vh;
   min-width: 40%;
   display: flex;
   flex-direction: column;
@@ -40,20 +50,19 @@ body {
   margin-bottom: 2rem;
 }
 
-#taskFormWrapper>div {
+#taskFormWrapper > div {
   min-width: 50%;
-  border-bottom: solid 1px #AF657B;
-  padding: .7rem;
+  border-bottom: solid 1px #213;
+  padding: 0.7rem;
 }
 
-#taskFormWrapper>div>input {
-  color: #453942;
+#taskFormWrapper > div > input {
   font-size: 32px;
   border: none;
   background-color: inherit;
 }
 
-#taskFormWrapper>div>input:focus {
+#taskFormWrapper > div > input:focus {
   outline: none;
 }
 
@@ -64,32 +73,169 @@ img {
 }
 
 .taskListWrapper {
-  min-width: 87%
+  min-width: 87%;
 }
 
 .taskWrapper {
   display: flex;
   align-content: center;
   justify-content: center;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .taskCheckBox {
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
 .taskContent {
   position: relative;
-  top: -.1rem;
+  top: -0.1rem;
   margin-left: 1rem;
 }
 
 .taskDeleteButton {
   margin-left: auto;
-  margin-right: .5rem;
+  margin-right: 0.5rem;
 }
 
 .taskCompleted {
   text-decoration: line-through;
-  color: #957982;
+  color: #768;
+}
+
+nav {
+  background-image: linear-gradient(
+    90deg,
+    rgba(200, 199, 218, 0.5) 0%,
+    rgba(255, 226, 235, 0.5) 100%
+  );
+  position: absolute;
+  top: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+nav > ul {
+  margin: 0;
+  padding: 1rem 0;
+  display: flex;
+  list-style-type: none;
+}
+
+nav > ul > li {
+  margin: 0 2rem;
+}
+
+nav > ul > li > a {
+  text-decoration: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(
+    45deg,
+    rgba(200, 199, 218, 0.5) 0%,
+    rgba(255, 226, 235, 0.5) 100%
+  );
+  min-width: 30%;
+  border-radius: 15px;
+  padding: 1rem;
+
+  box-shadow: 2px 4px rgb(34, 17, 51, 0.5);
+}
+
+.form > input,
+.form > button {
+  margin: 1.5rem 0;
+  border: none;
+  font-size: 24px;
+}
+
+.form > input {
+  border-bottom: solid 1px #213;
+  background-color: inherit;
+}
+
+.form > input:focus {
+  outline: none;
+}
+
+.form > button {
+  padding: 0.5rem;
+  border: solid 1px #213;
+  background-image: linear-gradient(
+    45deg,
+    rgba(200, 199, 218, 0.5) 0%,
+    rgba(255, 226, 235, 0.5) 100%
+  );
+}
+
+input::placeholder {
+  color: #768;
+}
+
+html,
+a,
+input,
+button {
+  color: #213;
+}
+
+a.selectedLink {
+  border-bottom: 1px solid #213;
+}
+
+.App * > img {
+  filter: invert(12%) sepia(11%) saturate(3813%) hue-rotate(230deg)
+    brightness(91%) contrast(89%);
+}
+
+* {
+  letter-spacing: 1px;
+}
+
+a,
+button,
+input::placeholder {
+  letter-spacing: 0.2em;
+}
+
+@media (max-width: 600px) {
+  .form,
+  #taskFormWrapper,
+  #todoWrapper {
+    min-width: 0%;
+    max-width: 90%;
+    padding: 0.5rem;
+  }
+
+  input::placeholder {
+    letter-spacing: 0.1rem;
+  }
+
+  .taskListWrapper {
+    width: 100%;
+  }
+
+  #taskFormWrapper {
+    margin: 0.5rem 0;
+  }
+
+  body {
+    font-size: 16px;
+  }
+
+  #taskFormWrapper > div > input {
+    font-size: 24px;
+    min-width: 0;
+    max-width: calc(100% - 16px);
+  }
+
+  img {
+    height: 16px;
+    width: 16px;
+  }
 }

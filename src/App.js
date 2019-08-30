@@ -26,7 +26,12 @@ function App() {
       <Router>
         <nav>
           {isAuth ? (
-            <PrivateNav submitLogout={() => this.submitLogout()} />
+            <PrivateNav
+              handleLogout={() => {
+                setIsAuth(false);
+                setToken("");
+              }}
+            />
           ) : (
             <PublicNav />
           )}
