@@ -3,7 +3,7 @@ import axios from "axios";
 
 import createButton from "./create-button.png";
 
-function TaskForm(props) {
+function TaskForm({ setTasks, axiosHeaders }) {
   const [taskContent, setTaskContent] = useState("");
 
   const handleContentChange = event => {
@@ -18,11 +18,15 @@ function TaskForm(props) {
 
   const handleSubmit = () => {
     axios
-      .post("http://localhost:3000/tasks", {
-        content: taskContent
-      })
+      .post(
+        "http://localhost:3000/tasks",
+        {
+          content: taskContent
+        },
+        { headers: axiosHeaders }
+      )
       .then(({ data: newTask }) => {
-        props.setTasks(previousTasks => {
+        setTasks(previousTasks => {
           return [...previousTasks, newTask];
         });
       })

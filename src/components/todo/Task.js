@@ -5,16 +5,20 @@ import uncheckedBox from "./unchecked-box.png";
 import checkedBox from "./checked-box.png";
 import deleteButton from "./delete-button.png";
 
-function Task({ task, setTasks }) {
+function Task({ task, setTasks, axiosHeaders }) {
   const checkBox = task.completed ? checkedBox : uncheckedBox;
   const completed = task.completed ? "taskCompleted" : "";
   const taskClasses = `taskContent ${completed}`;
 
   const handleCheckboxToggle = () => {
     axios
-      .put(`http://localhost:3000/tasks/${task._id}`, {
-        completed: !task.completed
-      })
+      .put(
+        `http://localhost:3000/tasks/${task._id}`,
+        {
+          completed: !task.completed
+        },
+        { headers: axiosHeaders }
+      )
       .then(({ data }) => {
         setTasks(previousTasks => {
           const taskIndex = previousTasks.findIndex(t => t._id === task._id);
@@ -32,7 +36,9 @@ function Task({ task, setTasks }) {
 
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:3000/tasks/${task._id}`)
+      .delete(`http://localhost:3000/tasks/${task._id}`, {
+        headers: axiosHeaders
+      })
       .then(({ data }) => {
         setTasks(previousTasks => {
           console.log(data);
