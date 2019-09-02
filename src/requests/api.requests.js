@@ -1,7 +1,17 @@
 import axios from "axios";
 
 const APIRequests = () => {
-  const serverUrl = "http://localhost:3000";
+  // const serverUrl = "http://localhost:3000";
+  const serverUrl = "https://luisphelipe-express-todo.herokuapp.com";
+
+  const wakeHerokuServer = async () => {
+    return axios
+      .get(serverUrl)
+      .then(() => {
+        console.log("server is awake!");
+      })
+      .catch(error => console.log(error));
+  };
 
   const signup = async (email, password, passwordConfirmation) => {
     return axios
@@ -93,6 +103,7 @@ const APIRequests = () => {
   };
 
   return {
+    wakeHerokuServer,
     signup,
     login,
     getAllTasks,

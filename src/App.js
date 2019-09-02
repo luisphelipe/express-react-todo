@@ -3,6 +3,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import "./App.css";
 
+import APIRequests from "./requests/api.requests";
+
 import TodoList from "./components/todo/TodoList";
 
 import Login from "./components/auth/Login";
@@ -23,6 +25,10 @@ function App() {
 
     console.log(token);
   }, [token]);
+
+  useEffect(() => {
+    APIRequests().wakeHerokuServer();
+  }, []);
 
   return (
     <div className="App">
