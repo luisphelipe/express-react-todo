@@ -14,7 +14,7 @@ const APIRequests = () => {
         return data.token;
       })
       .catch(errors => {
-        throw new Error(errors);
+        throw new Error(errors.response.data.error);
       });
   };
 
@@ -28,7 +28,7 @@ const APIRequests = () => {
         return data.token;
       })
       .catch(errors => {
-        throw new Error(errors);
+        throw new Error(errors.response.data.error);
       });
   };
 
@@ -41,7 +41,7 @@ const APIRequests = () => {
         return data;
       })
       .catch(errors => {
-        throw new Error(errors);
+        throw new Error(errors.response.data.error);
       });
   };
 
@@ -58,7 +58,7 @@ const APIRequests = () => {
         return data;
       })
       .catch(errors => {
-        throw new Error(errors);
+        throw new Error(errors.response.data.error);
       });
   };
 
@@ -75,7 +75,7 @@ const APIRequests = () => {
         return data;
       })
       .catch(errors => {
-        throw new Error(errors);
+        throw new Error(errors.response.data.error);
       });
   };
 
@@ -88,7 +88,7 @@ const APIRequests = () => {
         return data;
       })
       .catch(errors => {
-        throw new Error(errors);
+        throw new Error(errors.response.data.error);
       });
   };
 

@@ -2,12 +2,8 @@ import React from "react";
 
 import APIRequests from "../../requests/api.requests";
 
-import uncheckedBox from "./unchecked-box.png";
-import checkedBox from "./checked-box.png";
-import deleteButton from "./delete-button.png";
-
 function Task({ task, setTasks, axiosHeaders }) {
-  const checkBox = task.completed ? checkedBox : uncheckedBox;
+  const checkBox = task.completed ? "./checked-box.png" : "./unchecked-box.png";
   const completed = task.completed ? "taskCompleted" : "";
   const taskClasses = `taskContent ${completed}`;
 
@@ -55,7 +51,7 @@ function Task({ task, setTasks, axiosHeaders }) {
       <span className={taskClasses}>{task.content}</span>
 
       <span className="taskDeleteButton" onClick={handleDelete}>
-        <img src={deleteButton} alt="delete" />
+        <img src="./delete-button.png" alt="delete" />
       </span>
     </div>
   );

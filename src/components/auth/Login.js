@@ -1,18 +1,31 @@
 import React, { useState } from "react";
+import Modal from "react-modal";
 
 import APIRequests from "../../requests/api.requests";
 
 function Login({ setToken }) {
   let [email, setEmail] = useState(""),
-    [password, setPassword] = useState("");
+    [password, setPassword] = useState(""),
+    [loading, setLoading] = useState(false),
+    [error, setError] = useState("");
 
   async function submitLogin(event) {
+    setLoading(true);
     if (event) event.preventDefault();
 
-    const token = await APIRequests().login(email, password);
+    try {
+      const token = await APIRequests().login(email, password);
+      setToken(token);
+    } catch (error) {
+      setError(error.message);
+    }
 
-    setToken(token);
+    setLoading(false);
   }
+
+  const closeModal = () => {
+    setError("");
+  };
 
   return (
     <div className="form">
@@ -35,7 +48,29 @@ function Login({ setToken }) {
         }}
       />
 
-      <button onClick={event => submitLogin(event)}>Login</button>
+      {loading ? (
+        <button disabled>Waiting server...</button>
+      ) : (
+        <button onClick={event => submitLogin(event)}>Login</button>
+      )}
+
+      {error ? (
+        <Modal
+          id="modal"
+          isOpen={error}
+          onRequestClose={closeModal}
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <h1 id="modal-title">Error</h1>
+          <p>{error}</p>
+          <button id="modal-close-button" onClick={closeModal}>
+            Ok!
+          </button>
+        </Modal>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

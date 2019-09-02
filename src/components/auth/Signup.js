@@ -1,32 +1,17 @@
 import React, { useState } from "react";
+import Modal from "react-modal";
 
 import APIRequests from "../../requests/api.requests";
 
 function Signup({ setToken }) {
   let [email, setEmail] = useState(""),
     [password, setPassword] = useState(""),
-    [passwordConfirmation, setPasswordConfirmation] = useState("");
-
-  // function submitSignup(event) {
-  //   event.preventDefault();
-
-  //   axios
-  //     .post("http://localhost:3000/auth/signup", {
-  //       email,
-  //       password,
-  //       passwordConfirmation
-  //     })
-  //     .then(({ data }) => {
-  //       console.log(data);
-
-  //       setToken(data.token);
-  //     })
-  //     .catch(errors => {
-  //       console.log(errors);
-  //     });
-  // }
+    [passwordConfirmation, setPasswordConfirmation] = useState(""),
+    [loading, setLoading] = useState(false),
+    [error, setError] = useState("");
 
   async function submitSignup(event) {
+    setLoading(true);
     event.preventDefault();
 
     try {
@@ -38,9 +23,15 @@ function Signup({ setToken }) {
 
       if (token) setToken(token);
     } catch (error) {
-      console.log(error);
+      setError(error.message);
     }
+
+    setLoading(false);
   }
+
+  const closeModal = () => {
+    setError("");
+  };
 
   return (
     <div className="form">
@@ -66,7 +57,29 @@ function Signup({ setToken }) {
         onChange={event => setPasswordConfirmation(event.target.value)}
       />
 
-      <button onClick={event => submitSignup(event)}>Signup</button>
+      {loading ? (
+        <button disabled>Waiting server...</button>
+      ) : (
+        <button onClick={event => submitSignup(event)}>Signup</button>
+      )}
+
+      {error ? (
+        <Modal
+          id="modal"
+          isOpen={error}
+          onRequestClose={closeModal}
+          className="Modal"
+          overlayClassName="Overlay"
+        >
+          <h1 id="modal-title">Error</h1>
+          <p>{error}</p>
+          <button id="modal-close-button" onClick={closeModal}>
+            Ok!
+          </button>
+        </Modal>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

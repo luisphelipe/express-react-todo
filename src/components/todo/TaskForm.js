@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import APIRequests from "../../requests/api.requests";
 
-import createButton from "./create-button.png";
-
 function TaskForm({ setTasks, axiosHeaders }) {
   const [taskContent, setTaskContent] = useState("");
 
@@ -44,7 +42,7 @@ function TaskForm({ setTasks, axiosHeaders }) {
         />
 
         <span type="submit" onClick={handleSubmit}>
-          <img src={createButton} alt="Create" />
+          <img src="./create-button.png" alt="Create" />
         </span>
       </div>
     </div>
