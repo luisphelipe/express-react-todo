@@ -1,29 +1,21 @@
 import React, { useState } from "react";
-import axios from "axios";
 
-function Login({ handleAuth, setToken }) {
+import APIRequests from "../../requests/api.requests";
+
+function Login({ setToken }) {
   let [email, setEmail] = useState(""),
     [password, setPassword] = useState("");
 
-  function submitLogin(event) {
+  async function submitLogin(event) {
     if (event) event.preventDefault();
 
-    axios
-      .post("http://localhost:3000/auth/login", {
-        email: email,
-        password: password
-      })
-      .then(({ data }) => {
-        handleAuth();
-        setToken(data.token);
-      })
-      .catch(errors => {
-        console.log(errors);
-      });
+    const token = await APIRequests().login(email, password);
+
+    setToken(token);
   }
 
   return (
-    <div class="form">
+    <div className="form">
       <input
         type="text"
         name="email"

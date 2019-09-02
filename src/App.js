@@ -18,6 +18,9 @@ function App() {
     [token, setToken] = useState("");
 
   useEffect(() => {
+    if (token) setIsAuth(true);
+    else setIsAuth(false);
+
     console.log(token);
   }, [token]);
 
@@ -49,7 +52,6 @@ function App() {
           path="/login/"
           component={Login}
           isAuth={isAuth}
-          handleAuth={() => setIsAuth(true)}
           setToken={setToken}
         />
 
@@ -57,7 +59,6 @@ function App() {
           path="/signup/"
           component={Signup}
           isAuth={isAuth}
-          handleAuth={() => setIsAuth(true)}
           setToken={setToken}
         />
       </Router>

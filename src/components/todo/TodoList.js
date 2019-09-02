@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
+import APIRequests from "../../requests/api.requests";
 import TaskList from "./TaskList";
 import TaskForm from "./TaskForm";
 
@@ -13,16 +13,15 @@ function TodoList({ authToken }) {
     const header = { Authorization: `Bearer ${authToken}` };
     setHeader(header);
 
-    axios
-      .get("http://localhost:3000/tasks", {
-        headers: header
-      })
-      .then(({ data }) => {
+    (async () => {
+      try {
+        const data = await APIRequests().getAllTasks(header);
+
         setTasks(data);
-      })
-      .catch(errors => {
+      } catch (errors) {
         console.log(errors);
-      });
+      }
+    })();
   }, [authToken]);
 
   return (

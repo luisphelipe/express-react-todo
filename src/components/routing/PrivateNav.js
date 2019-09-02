@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function PrivateNav({ handleLogout }) {
   return (
@@ -10,7 +10,7 @@ function PrivateNav({ handleLogout }) {
         </NavLink>
       </li>
       <li id="logoutLi" onClick={handleLogout}>
-        <a href="#" onClick={event => event.preventDefault()}>
+        <a href="/" onClick={event => event.preventDefault()}>
           Logout
         </a>
       </li>

@@ -1,33 +1,49 @@
 import React, { useState } from "react";
-import axios from "axios";
 
-function Signup({ handleAuth, setToken }) {
+import APIRequests from "../../requests/api.requests";
+
+function Signup({ setToken }) {
   let [email, setEmail] = useState(""),
     [password, setPassword] = useState(""),
     [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  function submitSignup(event) {
+  // function submitSignup(event) {
+  //   event.preventDefault();
+
+  //   axios
+  //     .post("http://localhost:3000/auth/signup", {
+  //       email,
+  //       password,
+  //       passwordConfirmation
+  //     })
+  //     .then(({ data }) => {
+  //       console.log(data);
+
+  //       setToken(data.token);
+  //     })
+  //     .catch(errors => {
+  //       console.log(errors);
+  //     });
+  // }
+
+  async function submitSignup(event) {
     event.preventDefault();
 
-    axios
-      .post("http://localhost:3000/auth/signup", {
+    try {
+      const token = await APIRequests().signup(
         email,
         password,
         passwordConfirmation
-      })
-      .then(({ data }) => {
-        console.log(data);
+      );
 
-        handleAuth();
-        setToken(data.token);
-      })
-      .catch(errors => {
-        console.log(errors);
-      });
+      if (token) setToken(token);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
-    <div class="form">
+    <div className="form">
       <input
         type="text"
         name="email"

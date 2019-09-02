@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+
+import APIRequests from "../../requests/api.requests";
 
 import createButton from "./create-button.png";
 
@@ -16,26 +17,18 @@ function TaskForm({ setTasks, axiosHeaders }) {
     }
   };
 
-  const handleSubmit = () => {
-    axios
-      .post(
-        "http://localhost:3000/tasks",
-        {
-          content: taskContent
-        },
-        { headers: axiosHeaders }
-      )
-      .then(({ data: newTask }) => {
-        setTasks(previousTasks => {
-          return [...previousTasks, newTask];
-        });
-      })
-      .catch(errors => {
-        console.log(errors);
-      })
-      .finally(() => {
-        setTaskContent("");
+  const handleSubmit = async () => {
+    try {
+      const newTask = await APIRequests().createTask(axiosHeaders, taskContent);
+
+      setTasks(previousTasks => {
+        return [...previousTasks, newTask];
       });
+
+      setTaskContent("");
+    } catch (errors) {
+      console.log(errors);
+    }
   };
 
   return (

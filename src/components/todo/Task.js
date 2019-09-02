@@ -1,5 +1,6 @@
 import React from "react";
-import axios from "axios";
+
+import APIRequests from "../../requests/api.requests";
 
 import uncheckedBox from "./unchecked-box.png";
 import checkedBox from "./checked-box.png";
@@ -10,49 +11,39 @@ function Task({ task, setTasks, axiosHeaders }) {
   const completed = task.completed ? "taskCompleted" : "";
   const taskClasses = `taskContent ${completed}`;
 
-  const handleCheckboxToggle = () => {
-    axios
-      .put(
-        `http://localhost:3000/tasks/${task._id}`,
-        {
-          completed: !task.completed
-        },
-        { headers: axiosHeaders }
-      )
-      .then(({ data }) => {
-        setTasks(previousTasks => {
-          const taskIndex = previousTasks.findIndex(t => t._id === task._id);
+  const handleCheckboxToggle = async () => {
+    try {
+      const data = await APIRequests().toggleTaskStatus(axiosHeaders, task);
+      console.log(data);
 
-          const newTaskList = previousTasks.slice();
-          newTaskList[taskIndex].completed = data.completed;
+      setTasks(previousTasks => {
+        const taskIndex = previousTasks.findIndex(t => t._id === task._id),
+          newTaskList = previousTasks.slice();
 
-          return newTaskList;
-        });
-      })
-      .catch(errors => {
-        console.log(errors);
+        newTaskList[taskIndex].completed = data.completed;
+        return newTaskList;
       });
+    } catch (errors) {
+      console.log(errors);
+    }
   };
 
-  const handleDelete = () => {
-    axios
-      .delete(`http://localhost:3000/tasks/${task._id}`, {
-        headers: axiosHeaders
-      })
-      .then(({ data }) => {
-        setTasks(previousTasks => {
-          console.log(data);
-          const taskIndex = previousTasks.findIndex(t => t._id === task._id);
+  const handleDelete = async () => {
+    try {
+      const data = await APIRequests().deleteTask(axiosHeaders, task);
 
-          const newTaskList = previousTasks.slice();
-          newTaskList.splice(taskIndex, 1);
+      setTasks(previousTasks => {
+        console.log(data);
+        const taskIndex = previousTasks.findIndex(t => t._id === task._id),
+          newTaskList = previousTasks.slice();
 
-          return newTaskList;
-        });
-      })
-      .catch(errors => {
-        console.log(errors);
+        newTaskList.splice(taskIndex, 1);
+
+        return newTaskList;
       });
+    } catch (errors) {
+      console.log(errors);
+    }
   };
 
   return (
